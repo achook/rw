@@ -12,6 +12,7 @@
         <module>library</module>
         <module>clients</module>
         <module>common</module>
+        <module>main</module>
     </modules>
 
     <properties>

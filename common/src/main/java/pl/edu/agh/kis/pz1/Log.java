@@ -21,7 +21,7 @@ public class Log {
             return s;
         }
     }
-    protected Logger logger;
+    protected static Logger logger;
 
     public Log() {
         logger = Logger.getLogger(getClass().getName());
@@ -35,11 +35,11 @@ public class Log {
         logger.addHandler(handler);
     }
 
-    protected void log(String message) {
+    public static void log(String message) {
         logger.info(message);
     }
 
-    protected void logln(String message) {
+    public static void logln(String message) {
         log(message + "\n");
     }
 }
