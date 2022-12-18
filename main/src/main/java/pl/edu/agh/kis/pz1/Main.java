@@ -1,21 +1,24 @@
 package pl.edu.agh.kis.pz1;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class Main {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        System.out.println("Hello World!");
+        Library library = new Library();
 
-        Library library = new Library(5);
+        final int NUMBER_OF_READERS = 10;
+        final int NUMBER_OF_WRITERS = 2;
+        final int READING_TIME = 1000;
+        final int WRITING_TIME = 2000;
+        final int READER_TURNAROUND_TIME = 1000;
+        final int WRITER_TURNAROUND_TIME = 2000;
 
-        executorService.execute(new Reader("Reader 1", 1000, 1000, library));
-        executorService.execute(new Reader("Reader 2", 1000, 1000, library));
-        executorService.execute(new Reader("Reader 3", 1000, 1000, library));
-        executorService.execute(new Writer("Writer 1", 1000, 1000, library));
-        executorService.execute(new Reader("Reader 4", 1000, 1000, library));
-        executorService.execute(new Reader("Reader 5", 1000, 1000, library));
+        for (int i = 0; i < NUMBER_OF_READERS; i++) {
+            Reader reader = new Reader("Reader " + i, READING_TIME, READER_TURNAROUND_TIME, library);
+            reader.start();
+        }
 
+        for (int i = 0; i < NUMBER_OF_WRITERS; i++) {
+            Writer writer = new Writer("Writer " + i, WRITING_TIME, WRITER_TURNAROUND_TIME, library);
+            writer.start();
+        }
     }
 }

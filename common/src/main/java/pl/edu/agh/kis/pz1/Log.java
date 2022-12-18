@@ -11,9 +11,6 @@ public class Log {
 
         @Override
         public String format(LogRecord record) {
-            // This example will print date/time, class, and log level in yellow,
-            // followed by the log message and it's parameters in white .
-
             String s = record.getMessage();
 
             Object[] params = record.getParameters();

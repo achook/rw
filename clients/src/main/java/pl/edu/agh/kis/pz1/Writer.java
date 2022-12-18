@@ -1,10 +1,12 @@
 package pl.edu.agh.kis.pz1;
 
 public class Writer extends Thread {
-    private String name;
-    private int writingTime;
-    private int turnaroundTime;
-    private Library library;
+    private final String name;
+
+    private final int writingTime;
+    private final int turnaroundTime;
+
+    private final Library library;
 
     public Writer(String name, int writingTime, int turnaroundTime, Library library) {
         this.name = name;
@@ -14,14 +16,19 @@ public class Writer extends Thread {
     }
 
     public void run() {
-        System.out.println("Writer " + name + " started writing");
         while(true) {
             try {
                 library.startWriting();
-                System.out.println("Writing");
+                System.out.println("Writer " + name + " started writing");
+
+                library.incrementWriteCount();
+                var writeCount = library.getWriteCount();
+                System.out.println("Writer " + name + " write count: " + writeCount);
+
                 Thread.sleep(writingTime);
+                System.out.println("Writer " + name + " stopped writing");
                 library.stopWriting();
-                System.out.println("Stopped writing");
+
                 Thread.sleep(turnaroundTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="292e1626-d6dc-4ef2-9ba9-1bc092a79569" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/main/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clients/src/main/java/pl/edu/agh/kis/pz1/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/pl/edu/agh/kis/pz1/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clients/src/main/java/pl/edu/agh/kis/pz1/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/pl/edu/agh/kis/pz1/Writer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/pl/edu/agh/kis/pz1/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/pl/edu/agh/kis/pz1/Log.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/src/main/java/pl/edu/agh/kis/pz1/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/main/java/pl/edu/agh/kis/pz1/Library.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/main/java/pl/edu/agh/kis/pz1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/pl/edu/agh/kis/pz1/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +89,8 @@
       <workItem from="1669842805812" duration="902000" />
       <workItem from="1670451781562" duration="89000" />
       <workItem from="1670513600004" duration="19000" />
-      <workItem from="1671010835698" duration="3807000" />
+      <workItem from="1671010835698" duration="5392000" />
+      <workItem from="1671374843952" duration="2695000" />
     </task>
     <servers />
   </component>

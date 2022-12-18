@@ -14,14 +14,19 @@ public class Reader extends Thread{
     }
 
     public void run() {
-        System.out.println("Reader " + name + " started reading");
         while(true) {
             try {
                 library.startReading();
-                System.out.println("Reading");
+                System.out.println("Reader " + name + " started reading");
+
+                var writeCount = library.getWriteCount();
+                System.out.println("Reader " + name + " write count: " + writeCount);
+
                 Thread.sleep(readingTime);
+                System.out.println("Reader " + name + " stopped reading");
+
                 library.stopReading();
-                System.out.println("Stopped reading");
+
                 Thread.sleep(turnaroundTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
