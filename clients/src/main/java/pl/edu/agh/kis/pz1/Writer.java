@@ -3,15 +3,15 @@ package pl.edu.agh.kis.pz1;
 public class Writer extends Thread {
     private final String name;
 
-    private final int writingTime;
-    private final int turnaroundTime;
+    private final int minWritingTime;
+    private final int maxWritingTime;
 
     private final Library library;
 
-    public Writer(String name, int writingTime, int turnaroundTime, Library library) {
+    public Writer(String name, int minWritingTime, int maxWritingTime, Library library) {
         this.name = name;
-        this.writingTime = writingTime;
-        this.turnaroundTime = turnaroundTime;
+        this.minWritingTime = minWritingTime;
+        this.maxWritingTime = maxWritingTime;
         this.library = library;
     }
 
@@ -19,17 +19,17 @@ public class Writer extends Thread {
         while(true) {
             try {
                 library.startWriting();
-                System.out.println("Writer " + name + " started writing");
+                System.out.println(name + " started writing");
 
                 library.incrementWriteCount();
                 var writeCount = library.getWriteCount();
-                System.out.println("Writer " + name + " write count: " + writeCount);
+                System.out.println(name + " wrote and now the write count equals " + writeCount);
 
+                var writingTime = (int) (Math.random() * (maxWritingTime - minWritingTime) + minWritingTime);
                 Thread.sleep(writingTime);
-                System.out.println("Writer " + name + " stopped writing");
-                library.stopWriting();
 
-                Thread.sleep(turnaroundTime);
+                System.out.println(name + " stopped writing");
+                library.stopWriting();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

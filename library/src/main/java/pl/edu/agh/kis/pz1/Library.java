@@ -29,16 +29,27 @@ public class Library {
     }
 
     public void startReading() throws InterruptedException {
+        System.out.println("A new person has entered the queue, which now consists of "
+                + queue.getQueueLength() + " people");
+
         // Get in the line to be serviced
         queue.acquire();
 
+        // If there are 5 readers already, wait for one to finish
+        while (currentReadersNumber == 5) {
+            Thread.sleep(100);
+        }
+
         // Lock access to currentReadersNumber
         readersNumberLock.acquire(1);
+
         // If I am the first reader
         if (++currentReadersNumber == 1) {
             // Prevent writers from entering
             writeCountLock.acquire(1);
         }
+        System.out.println("A new reader says that there are currently " + currentReadersNumber + " readers inside");
+
         // Unlock access to currentReadersNumber
         readersNumberLock.release(1);
 
@@ -54,11 +65,16 @@ public class Library {
             // Allow writers to enter
             writeCountLock.release(1);
         }
+
+        System.out.println("A reader is leaving the library and there are now " + currentReadersNumber + " readers inside");
         // Unlock access to currentReadersNumber
         readersNumberLock.release(1);
     }
 
     public void startWriting() throws InterruptedException {
+        System.out.println("A new person has entered the queue, which now consists of "
+                + queue.getQueueLength() + " people");
+
         // Get in the line to be serviced
         queue.acquire();
 

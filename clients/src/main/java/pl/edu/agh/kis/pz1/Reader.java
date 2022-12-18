@@ -1,15 +1,17 @@
 package pl.edu.agh.kis.pz1;
 
 public class Reader extends Thread{
-    private String name;
-    private int readingTime;
-    private int turnaroundTime;
-    private Library library;
+    private final String name;
 
-    public Reader(String name, int readingTime, int turnaroundTime, Library library) {
+    private final int minReadingTime;
+    private final int maxReadingTime;
+
+    private final Library library;
+
+    public Reader(String name, int minReadingTime, int maxReadingTime, Library library) {
         this.name = name;
-        this.readingTime = readingTime;
-        this.turnaroundTime = turnaroundTime;
+        this.minReadingTime = minReadingTime;
+        this.maxReadingTime = maxReadingTime;
         this.library = library;
     }
 
@@ -17,17 +19,16 @@ public class Reader extends Thread{
         while(true) {
             try {
                 library.startReading();
-                System.out.println("Reader " + name + " started reading");
+                System.out.println(name + " started reading");
 
                 var writeCount = library.getWriteCount();
-                System.out.println("Reader " + name + " write count: " + writeCount);
+                System.out.println(name + " read that the write count equals " + writeCount);
 
+                var readingTime = (int) (Math.random() * (maxReadingTime - minReadingTime) + minReadingTime);
                 Thread.sleep(readingTime);
-                System.out.println("Reader " + name + " stopped reading");
+                System.out.println(name + " stopped reading");
 
                 library.stopReading();
-
-                Thread.sleep(turnaroundTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
