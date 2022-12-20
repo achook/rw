@@ -14,4 +14,15 @@ class ReaderTest {
         Reader reader = new Reader("Reader 1", 1000, 3000, library);
         assertEquals("Reader 1", reader.getName());
     }
+
+    @Test
+    void run() {
+        Library library = new Library();
+        assertNotNull(library);
+
+        Reader reader = new Reader("Reader 1", 1000, 3000, library);
+        assertNotNull(reader);
+
+        reader.start();
+    }
 }

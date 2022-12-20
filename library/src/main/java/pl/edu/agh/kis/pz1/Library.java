@@ -99,6 +99,8 @@ public class Library {
 
         // Prevent readers and other writers from entering
         writeCountLock.acquire(1);
+
+        this.incrementWriteCount();
     }
 
     /**
@@ -117,7 +119,7 @@ public class Library {
         return writeCount;
     }
 
-    public void incrementWriteCount() {
+    void incrementWriteCount() {
         writeCount++;
     }
 }

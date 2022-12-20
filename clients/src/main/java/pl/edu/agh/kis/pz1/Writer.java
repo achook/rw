@@ -29,7 +29,6 @@ public class Writer extends Thread {
                 library.startWriting();
                 logger.logln(name + " started writing");
 
-                library.incrementWriteCount();
                 var writeCount = library.getWriteCount();
                 logger.logln(name + " wrote and now the write count equals " + writeCount);
 

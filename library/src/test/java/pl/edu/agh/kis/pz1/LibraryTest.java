@@ -24,4 +24,20 @@ class LibraryTest {
         library.incrementWriteCount();
         assertEquals(1, library.getWriteCount());
     }
+
+    @Test
+    void writing() throws InterruptedException {
+        Library library = new Library();
+        library.startWriting();
+        library.stopWriting();
+        assertEquals(1, library.getWriteCount());
+    }
+
+    @Test
+    void reading() throws InterruptedException {
+        Library library = new Library();
+        library.startReading();
+        library.stopReading();
+        assertEquals(0, library.getWriteCount());
+    }
 }
