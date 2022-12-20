@@ -1,37 +1,46 @@
 package pl.edu.agh.kis.pz1;
 
-public class Writer extends Thread {
-    private final String name;
+import java.util.concurrent.ThreadLocalRandom;
 
+public class Writer extends Thread {
     private final int minWritingTime;
     private final int maxWritingTime;
 
     private final Library library;
 
     public Writer(String name, int minWritingTime, int maxWritingTime, Library library) {
-        this.name = name;
+        this.setName(name);
         this.minWritingTime = minWritingTime;
         this.maxWritingTime = maxWritingTime;
         this.library = library;
     }
 
+    /**
+     * Runs the thread.
+     */
+    @Override
     public void run() {
+        var logger = new Log();
+
         while(true) {
             try {
+                var name = this.getName();
+
                 library.startWriting();
-                System.out.println(name + " started writing");
+                logger.logln(name + " started writing");
 
                 library.incrementWriteCount();
                 var writeCount = library.getWriteCount();
-                System.out.println(name + " wrote and now the write count equals " + writeCount);
+                logger.logln(name + " wrote and now the write count equals " + writeCount);
 
-                var writingTime = (int) (Math.random() * (maxWritingTime - minWritingTime) + minWritingTime);
+                var writingTime = ThreadLocalRandom.current().nextInt(minWritingTime, maxWritingTime);
                 Thread.sleep(writingTime);
 
-                System.out.println(name + " stopped writing");
+                logger.logln(name + " stopped writing");
                 library.stopWriting();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }

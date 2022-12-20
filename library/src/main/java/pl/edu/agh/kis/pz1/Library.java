@@ -13,6 +13,8 @@ public class Library {
     // Number of writes to the library
     private int writeCount;
 
+    private Log logger;
+
 
     public Library() {
         // Acts as a queue, preserves order of readers and writers
@@ -26,10 +28,17 @@ public class Library {
 
         currentReadersNumber = 0;
         writeCount = 0;
+
+        logger = new Log();
     }
 
+    /**
+     * Starts reading, blocks if there is a writer in the queue
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     public void startReading() throws InterruptedException {
-        System.out.println("A new person has entered the queue, which now consists of "
+        logger.logln("A new person has entered the queue, which now consists of "
                 + queue.getQueueLength() + " people");
 
         // Get in the line to be serviced
@@ -48,7 +57,7 @@ public class Library {
             // Prevent writers from entering
             writeCountLock.acquire(1);
         }
-        System.out.println("A new reader says that there are currently " + currentReadersNumber + " readers inside");
+        logger.logln("A new reader says that there are currently " + currentReadersNumber + " readers inside");
 
         // Unlock access to currentReadersNumber
         readersNumberLock.release(1);
@@ -57,6 +66,11 @@ public class Library {
         queue.release();
     }
 
+    /**
+     * Stops reading
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     public void stopReading() throws InterruptedException {
         // Lock access to currentReadersNumber
         readersNumberLock.acquire(1);
@@ -66,13 +80,18 @@ public class Library {
             writeCountLock.release(1);
         }
 
-        System.out.println("A reader is leaving the library and there are now " + currentReadersNumber + " readers inside");
+        logger.logln("A reader is leaving the library and there are now " + currentReadersNumber + " readers inside");
         // Unlock access to currentReadersNumber
         readersNumberLock.release(1);
     }
 
+    /**
+     * Starts writing, blocks if there are readers or writers in the queue
+     *
+     * @throws InterruptedException if the thread is interrupted
+     */
     public void startWriting() throws InterruptedException {
-        System.out.println("A new person has entered the queue, which now consists of "
+        logger.logln("A new person has entered the queue, which now consists of "
                 + queue.getQueueLength() + " people");
 
         // Get in the line to be serviced
@@ -82,6 +101,10 @@ public class Library {
         writeCountLock.acquire(1);
     }
 
+    /**
+     * Stops writing
+     *
+     */
     public void stopWriting() {
         // Allow readers and other writers to enter
         writeCountLock.release(1);

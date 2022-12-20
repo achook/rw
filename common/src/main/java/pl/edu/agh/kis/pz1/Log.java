@@ -10,18 +10,15 @@ public class Log {
     public static class LogFormatter extends Formatter {
 
         @Override
-        public String format(LogRecord record) {
-            String s = record.getMessage();
+        public String format(LogRecord lr) {
 
-            Object[] params = record.getParameters();
-
-            return s;
+            return lr.getMessage();
         }
     }
-    protected static Logger logger;
+    protected Logger logger;
 
     public Log() {
-        logger = Logger.getLogger(getClass().getName());
+        logger = Logger.getLogger(Thread.currentThread().getName());
         logger.setUseParentHandlers(false);
 
         ConsoleHandler handler = new ConsoleHandler();
@@ -32,11 +29,11 @@ public class Log {
         logger.addHandler(handler);
     }
 
-    public static void log(String message) {
+    public void log(String message) {
         logger.info(message);
     }
 
-    public static void logln(String message) {
+    public void logln(String message) {
         log(message + "\n");
     }
 }
